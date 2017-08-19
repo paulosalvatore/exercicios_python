@@ -1,7 +1,7 @@
 var tbody, trBase, quantidadeExercicios;
 
-var urlBase = "https://github.com/paulosalvatore/exercicios_python/";
-var urlBaseRaw = "https://raw.githubusercontent.com/paulosalvatore/exercicios_python/";
+var urlBase = "https://github.com/paulosalvatore/exercicios_python/blob/master/";
+var urlBaseRaw = "https://raw.githubusercontent.com/paulosalvatore/exercicios_python/master/";
 
 function atualizarListaExercicios()
 {
@@ -21,11 +21,11 @@ function atualizarListaExercicios()
 		td.eq(1).find("a").eq(0).attr("href", urlEnunciado);
 		td.eq(1).find("a").eq(1).attr("href", urlEnunciadoRaw);
 
-		var urlResposta = urlBase + "respostas/resposta" + i + ".py";
-		var urlRespostaRaw = urlBaseRaw + "respostas/resposta" + i + ".py";
+		var urlResolucao = urlBase + "resolucoes/exercicio" + i + ".py";
+		var urlResolucaoRaw = urlBaseRaw + "resolucoes/exercicio" + i + ".py";
 
-		td.eq(2).find("a").eq(0).attr("href", urlResposta);
-		td.eq(2).find("a").eq(1).attr("href", urlRespostaRaw);
+		td.eq(2).find("a").eq(0).attr("href", urlResolucao);
+		td.eq(2).find("a").eq(1).attr("href", urlResolucaoRaw);
 	}
 }
 
@@ -34,7 +34,7 @@ $(function(){
 	trBase = tbody.find("tr");
 	trBase.remove();
 
-	$.getJSON("https://api.github.com/repos/paulosalvatore/mindrace/contents/Arduino", function(data){
+	$.getJSON("https://api.github.com/repos/paulosalvatore/exercicios_python/contents/exercicios", function(data){
 		quantidadeExercicios = data.length;
 
 		atualizarListaExercicios();
