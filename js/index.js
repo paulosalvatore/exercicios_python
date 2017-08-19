@@ -1,39 +1,113 @@
-var tbody, trBase, quantidadeExercicios;
+var tbody, trBase;
 
-var nomeProjeto = "ExerciciosPython";
-var projetoWebsite = "exercicios_python";
+var linguagem = "Python";
+
+var nomeProjeto = "Exercicios" + linguagem;
+var projetoWebsite = "exercicios_" + linguagem.toLowerCase();
 
 var url = "https://github.com/paulosalvatore/";
+
+var urlAPI = "https://api.github.com/repos/paulosalvatore/" + nomeProjeto + "/contents/exercicios";
 var urlBase = url + nomeProjeto + "/";
 var urlWebsiteBase = url + projetoWebsite + "/";
 var urlBaseDiretorios = urlBase + "/tree/master/";
-var urlBaseArquivos = urlBase + "/blob/master/";
-var urlBaseRaw = "https://raw.githubusercontent.com/paulosalvatore/" + nomeProjeto + "/master/";
 
-function atualizarListaExercicios()
+var dificuldades = {
+	"Principiante": 1,
+	"Intermediário": 2,
+	"Avançado": 3
+};
+
+// Atualização de Lista de Exercícios
+
+function atualizarListaExercicios(arquivos)
 {
-	for (var i = 1; i <= quantidadeExercicios; i++)
-	{
-		var trClone = trBase.clone();
+	$.each(arquivos, function(chave, arquivo) {
+		chave++;
 
-		tbody.append(trClone);
+		var downloadURL = arquivo.download_url;
+		var htmlURL = arquivo.html_url;
 
-		var td = trClone.find("td");
+		$.ajax({
+			url: downloadURL
+		}).done(function(conteudo){
+			conteudo = conteudo.split("\n");
 
-		td.eq(0).text(i);
+			var objetivo = conteudo[3].split("Objetivo: ").join("");
+			var dificuldade = conteudo[4].split("Dificuldade: ").join("");
+			var dificuldadeId = dificuldades[dificuldade];
+			console.log(dificuldade);
+			console.log(dificuldades);
 
-		var urlEnunciado = urlBaseArquivos + "exercicios/exercicio" + i + ".py";
-		var urlEnunciadoRaw = urlBaseRaw + "exercicios/exercicio" + i + ".py";
+			var trClone = trBase.clone();
 
-		td.eq(1).find("a").eq(0).attr("href", urlEnunciado);
-		td.eq(1).find("a").eq(1).attr("href", urlEnunciadoRaw);
+			var td = trClone.find("td");
 
-		var urlResolucao = urlBaseArquivos + "resolucoes/exercicio" + i + ".py";
-		var urlResolucaoRaw = urlBaseRaw + "resolucoes/exercicio" + i + ".py";
+			td.eq(0).text(chave);
 
-		td.eq(2).find("a").eq(0).attr("href", urlResolucao);
-		td.eq(2).find("a").eq(1).attr("href", urlResolucaoRaw);
-	}
+			td.eq(1).find("a").eq(0).attr("href", htmlURL);
+			td.eq(1).find("a").eq(1).attr("href", downloadURL);
+
+			td.eq(2).find("a").eq(0).attr("href", linkResolucao(htmlURL));
+			td.eq(2).find("a").eq(1).attr("href", linkResolucao(downloadURL));
+
+			td.eq(3).attr("data-order", dificuldadeId).text(dificuldade);
+
+			tbody.append(trClone);
+
+			if (chave === arquivos.length)
+				definirDataTable();
+		});
+	});
+}
+
+// Transformar link de arquivo de exercício para link de arquivo de resolução
+
+function linkResolucao(url)
+{
+	return url.split("/exercicios/").join("/resolucoes/");
+}
+
+// DataTable
+
+function definirDataTable()
+{
+	var dataTable = $(".datatable");
+	var dataTableOrder = [];
+
+	dataTable
+		.find("thead")
+		.find("tr")
+		.find("th")
+		.each(function(){
+			var defaultSort = $(this).hasClass("default_sort");
+
+			if (defaultSort)
+			{
+				var index = $(this).index();
+
+				var defaultSortType = $(this).hasClass("desc") ? "desc" : "asc";
+
+				dataTableOrder.push([index, defaultSortType]);
+			}
+		});
+
+	if (dataTableOrder.length === 0)
+		dataTableOrder.push([0, "asc"]);
+
+	dataTable.dataTable({
+		"language": {
+			"url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Portuguese-Brasil.json"
+		},
+		"responsive": true,
+		"columnDefs": [
+			{
+				targets: "no-sort",
+				orderable: false
+			}
+		],
+		"order": dataTableOrder
+	});
 }
 
 $(function(){
@@ -46,9 +120,7 @@ $(function(){
 	trBase = tbody.find("tr");
 	trBase.remove();
 
-	$.getJSON("https://api.github.com/repos/paulosalvatore/" + nomeProjeto + "/contents/exercicios", function(data){
-		quantidadeExercicios = data.length;
-
-		atualizarListaExercicios();
+	$.getJSON(urlAPI, function(arquivos){
+		atualizarListaExercicios(arquivos);
 	});
 });
