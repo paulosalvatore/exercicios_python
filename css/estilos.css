@@ -4,11 +4,14 @@ body {
 	margin: 0;
 }
 
-.view_github {
-	margin-top: 30px;
-	margin-left: -7%;
+#cabecalho .view {
+	width: fit-content;
+	height: 0;
+}
+
+#cabecalho .view .botao {
 	padding: 20px;
-	position: absolute;
+	margin: 5px;
 }
 
 .botao {

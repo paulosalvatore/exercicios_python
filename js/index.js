@@ -1,8 +1,11 @@
 var tbody, trBase, quantidadeExercicios;
 
 var nomeProjeto = "ExerciciosPython";
+var projetoWebsite = "exercicios_python";
 
-var urlBase = "https://github.com/paulosalvatore/" + nomeProjeto + "/";
+var url = "https://github.com/paulosalvatore/";
+var urlBase = url + nomeProjeto + "/";
+var urlWebsiteBase = url + projetoWebsite + "/";
 var urlBaseDiretorios = urlBase + "/tree/master/";
 var urlBaseArquivos = urlBase + "/blob/master/";
 var urlBaseRaw = "https://raw.githubusercontent.com/paulosalvatore/" + nomeProjeto + "/master/";
@@ -35,6 +38,7 @@ function atualizarListaExercicios()
 
 $(function(){
 	$("a[data-type='github']").attr("href", urlBase);
+	$("a[data-type='website_files']").attr("href", urlWebsiteBase);
 	$("a[data-type='exercicios']").attr("href", urlBaseDiretorios + "exercicios/");
 	$("a[data-type='resolucoes']").attr("href", urlBaseDiretorios + "resolucoes/");
 
