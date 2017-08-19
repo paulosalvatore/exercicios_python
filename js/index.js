@@ -2,7 +2,9 @@ var tbody, trBase, quantidadeExercicios;
 
 var nomeProjeto = "ExerciciosPython";
 
-var urlBase = "https://github.com/paulosalvatore/" + nomeProjeto + "/blob/master/";
+var urlBase = "https://github.com/paulosalvatore/" + nomeProjeto + "/";
+var urlBaseDiretorios = urlBase + "/tree/master/";
+var urlBaseArquivos = urlBase + "/blob/master/";
 var urlBaseRaw = "https://raw.githubusercontent.com/paulosalvatore/" + nomeProjeto + "/master/";
 
 function atualizarListaExercicios()
@@ -17,13 +19,13 @@ function atualizarListaExercicios()
 
 		td.eq(0).text(i);
 
-		var urlEnunciado = urlBase + "exercicios/exercicio" + i + ".py";
+		var urlEnunciado = urlBaseArquivos + "exercicios/exercicio" + i + ".py";
 		var urlEnunciadoRaw = urlBaseRaw + "exercicios/exercicio" + i + ".py";
 
 		td.eq(1).find("a").eq(0).attr("href", urlEnunciado);
 		td.eq(1).find("a").eq(1).attr("href", urlEnunciadoRaw);
 
-		var urlResolucao = urlBase + "resolucoes/exercicio" + i + ".py";
+		var urlResolucao = urlBaseArquivos + "resolucoes/exercicio" + i + ".py";
 		var urlResolucaoRaw = urlBaseRaw + "resolucoes/exercicio" + i + ".py";
 
 		td.eq(2).find("a").eq(0).attr("href", urlResolucao);
@@ -32,6 +34,10 @@ function atualizarListaExercicios()
 }
 
 $(function(){
+	$("a[data-type='github']").attr("href", urlBase);
+	$("a[data-type='exercicios']").attr("href", urlBaseDiretorios + "exercicios/");
+	$("a[data-type='resolucoes']").attr("href", urlBaseDiretorios + "resolucoes/");
+
 	tbody = $("#exercicios").find("table").find("tbody");
 	trBase = tbody.find("tr");
 	trBase.remove();
