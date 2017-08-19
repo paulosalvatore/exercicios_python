@@ -159,6 +159,11 @@ body {
 	color: #FFFFFF;
 }
 
+#conteudo table thead tr th {
+	-webkit-filter: brightness(1000%);
+	filter: brightness(1000%);
+}
+
 hr {
 	border-color: white;
 	border-style: solid;
