@@ -1,0 +1,169 @@
+body {
+	min-width: 700px;
+	font-family: "Sintony", sans-serif;
+	margin: 0;
+}
+
+.view_github {
+	margin-top: 30px;
+	margin-left: -7%;
+	padding: 20px;
+	position: absolute;
+}
+
+.botao {
+	display: inline-block;
+	margin-bottom: 1rem;
+	color: rgba(255, 255, 255, 0.7);
+	background-color: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.2);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 0.3rem;
+	transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+	text-decoration: none;
+}
+
+.botao:hover {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+#cabecalho {
+	width: 100%;
+	background-color: #159957;
+	background-image: linear-gradient(120deg, #155799, #159957);
+	color: white;
+	height: 260px;
+	padding-top: 10px;
+}
+
+#logo {
+	font-size: 50px;
+	width: 100%;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	margin-bottom: 10px;
+}
+
+#logo img {
+	padding: 10px;
+	margin: 20px;
+	height: 120px;
+	background: rgba(224, 224, 224, 0.5);
+	border-radius: 20px;
+}
+
+#python {
+	float: right;
+}
+
+.menu {
+	background: rgba(224, 224, 224, 0.5);
+	width: 100%;
+}
+
+.menu .botoes {
+	width: fit-content;
+}
+
+.menu,
+.menu .botoes {
+	height: 70px;
+}
+
+.menu .botao {
+	margin: 10px;
+	padding: 10px;
+	width: 180px;
+}
+
+.menu .botao a {
+	display: block;
+	font-size: 20px;
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#conteudo {
+	width: 100%;
+}
+
+#conteudo .bloco {
+	padding: 20px;
+	background: #E6E6E6;
+}
+
+#conteudo .bloco:not(:first-child) {
+	margin-top: -20px;
+}
+
+#conteudo .bloco.branco {
+	background: #FFFFFF;
+}
+
+#conteudo .separador img {
+	background: #E6E6E6;
+	width: 40px;
+}
+
+#conteudo .bloco .conteudo_bloco {
+	min-width: 650px;
+	width: 50%;
+	padding: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	text-align: justify;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#conteudo .bloco h1 {
+	font-size: 26px;
+	text-transform: uppercase;
+}
+
+#conteudo .bloco p {
+	text-indent: 30px;
+}
+
+#conteudo .bloco a {
+	color: #8F149B;
+	font-weight: bold;
+}
+
+#conteudo .bloco a:hover {
+	color: #B456C8;
+}
+
+#conteudo table {
+	font-size: 20px;
+	border: 1px solid #C3C3C3;
+}
+
+#conteudo table thead tr {
+	font-weight: bold;
+	background-color: #159957;
+	background-image: linear-gradient(120deg, #155799, #159957);
+	color: #FFFFFF;
+}
+
+#conteudo table tbody tr td {
+	text-align: center;
+}
+
+#conteudo table tbody tr td:nth-child(1) {
+	font-weight: bold;
+}
+
+#conteudo table tbody tr:nth-child(even) td {
+	background-color: #EBEBEB;
+}
+
+hr {
+	border-color: white;
+	border-style: solid;
+	border-top: solid 1px #EFF0F1;
+}
