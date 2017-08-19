@@ -19,7 +19,6 @@ var dificuldades = {
 };
 
 // Atualização de Lista de Exercícios
-
 function atualizarListaExercicios(arquivos)
 {
 	$.each(arquivos, function(chave, arquivo) {
@@ -36,8 +35,6 @@ function atualizarListaExercicios(arquivos)
 			var objetivo = conteudo[3].split("Objetivo: ").join("");
 			var dificuldade = conteudo[4].split("Dificuldade: ").join("");
 			var dificuldadeId = dificuldades[dificuldade];
-			console.log(dificuldade);
-			console.log(dificuldades);
 
 			var trClone = trBase.clone();
 
@@ -51,25 +48,25 @@ function atualizarListaExercicios(arquivos)
 			td.eq(2).find("a").eq(0).attr("href", linkResolucao(htmlURL));
 			td.eq(2).find("a").eq(1).attr("href", linkResolucao(downloadURL));
 
-			td.eq(3).attr("data-order", dificuldadeId).text(dificuldade);
+			td.eq(3).attr("data-order", dificuldadeId);
+			td.eq(3).find(".dificuldade").text(dificuldade);
+			td.eq(3).find(".objetivo").attr("title", objetivo);
 
 			tbody.append(trClone);
 
 			if (chave === arquivos.length)
-				definirDataTable();
+				definirEventos();
 		});
 	});
 }
 
 // Transformar link de arquivo de exercício para link de arquivo de resolução
-
 function linkResolucao(url)
 {
 	return url.split("/exercicios/").join("/resolucoes/");
 }
 
 // DataTable
-
 function definirDataTable()
 {
 	var dataTable = $(".datatable");
@@ -108,6 +105,16 @@ function definirDataTable()
 		],
 		"order": dataTableOrder
 	});
+}
+
+// Eventos da Página
+function definirEventos()
+{
+	setTimeout(function(){
+		$("[data-toggle='tooltip']").tooltip();
+
+		definirDataTable();
+	}, 0);
 }
 
 $(function(){
