@@ -1,7 +1,9 @@
 var tbody, trBase, quantidadeExercicios;
 
-var urlBase = "https://github.com/paulosalvatore/exercicios_python/blob/master/";
-var urlBaseRaw = "https://raw.githubusercontent.com/paulosalvatore/exercicios_python/master/";
+var nomeProjeto = "ExerciciosPython";
+
+var urlBase = "https://github.com/paulosalvatore/" + nomeProjeto + "/blob/master/";
+var urlBaseRaw = "https://raw.githubusercontent.com/paulosalvatore/" + nomeProjeto + "/master/";
 
 function atualizarListaExercicios()
 {
@@ -34,7 +36,7 @@ $(function(){
 	trBase = tbody.find("tr");
 	trBase.remove();
 
-	$.getJSON("https://api.github.com/repos/paulosalvatore/exercicios_python/contents/exercicios", function(data){
+	$.getJSON("https://api.github.com/repos/paulosalvatore/" + nomeProjeto + "/contents/exercicios", function(data){
 		quantidadeExercicios = data.length;
 
 		atualizarListaExercicios();
