@@ -141,6 +141,11 @@ body {
 	color: #B456C8;
 }
 
+#conteudo .bloco a span,
+#conteudo .bloco a:hover span {
+	color: black;
+}
+
 #conteudo table thead tr {
 	font-weight: bold;
 	background-color: #159957;

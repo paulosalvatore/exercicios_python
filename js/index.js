@@ -7,7 +7,7 @@ var projetoWebsite = "exercicios_" + linguagem.toLowerCase();
 
 var url = "https://github.com/paulosalvatore/";
 
-var urlAPI = "https://api.github.com/repos/paulosalvatore/" + nomeProjeto + "/contents/exercicios";
+var urlAPI = "https://api.github.com/repos/paulosalvatore/" + nomeProjeto + "/contents/resolucoes";
 var urlBase = url + nomeProjeto + "/";
 var urlWebsiteBase = url + projetoWebsite + "/";
 var urlBaseDiretorios = urlBase + "/tree/master/";
@@ -30,10 +30,29 @@ function atualizarListaExercicios(arquivos)
 		$.ajax({
 			url: downloadURL
 		}).done(function(conteudo){
-			conteudo = conteudo.split("\n");
+			var linhas = conteudo.split("\n");
 
-			var objetivo = conteudo[3].split("Objetivo: ").join("");
-			var dificuldade = conteudo[4].split("Dificuldade: ").join("");
+			var linhaEncontrada = 0;
+
+			var conteudoExercicio = linhas.slice();
+
+			$.each(linhas, function(index, value){
+				if (value === '"""')
+					linhaEncontrada++;
+
+				if (linhaEncontrada === 2)
+				{
+					conteudoExercicio =
+						linhas
+							.slice(0, index + 2)
+							.join("\n");
+
+					return false;
+				}
+			});
+
+			var objetivo = linhas[3].split("Objetivo: ").join("");
+			var dificuldade = linhas[4].split("Dificuldade: ").join("");
 			var dificuldadeId = dificuldades[dificuldade];
 
 			var trClone = trBase.clone();
@@ -42,11 +61,17 @@ function atualizarListaExercicios(arquivos)
 
 			td.eq(0).text(chave);
 
-			td.eq(1).find("a").eq(0).attr("href", htmlURL);
-			td.eq(1).find("a").eq(1).attr("href", downloadURL);
+			td.eq(1).find("a").eq(0).attr("href", linkExercicio(htmlURL));
+			td.eq(1)
+				.find("a").eq(1)
+				.attr("download", "exercicio" + chave + ".py")
+				.attr("href", "data:application/python;charset=utf-8;base64," + btoa(conteudoExercicio));
 
-			td.eq(2).find("a").eq(0).attr("href", linkResolucao(htmlURL));
-			td.eq(2).find("a").eq(1).attr("href", linkResolucao(downloadURL));
+			td.eq(2).find("a").eq(0).attr("href", htmlURL);
+			td.eq(2)
+				.find("a").eq(1)
+				.attr("download", "exercicio" + chave + "_resolvido.py")
+				.attr("href", "data:application/python;charset=utf-8;base64," + btoa(conteudo));
 
 			td.eq(3).attr("data-order", dificuldadeId);
 			td.eq(3).find(".dificuldade").text(dificuldade);
@@ -61,9 +86,13 @@ function atualizarListaExercicios(arquivos)
 }
 
 // Transformar link de arquivo de exercício para link de arquivo de resolução
-function linkResolucao(url)
+function linkExercicio(url)
 {
-	return url.split("/exercicios/").join("/resolucoes/");
+	return url
+		.split("/resolucoes/")
+		.join("/exercicios/")
+		.split("_resolvido")
+		.join("");
 }
 
 // DataTable
