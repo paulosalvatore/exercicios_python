@@ -32,7 +32,7 @@ function atualizarListaExercicios(arquivos)
 		var htmlURL = arquivo.html_url;
 
 		$.ajax({
-			url: downloadURL + "asd"
+			url: downloadURL
 		}).done(function(conteudo){
 			var linhas = conteudo.split("\n");
 
