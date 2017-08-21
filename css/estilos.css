@@ -9,15 +9,15 @@ body {
 	height: 0;
 }
 
-#cabecalho .view .botao {
-	padding: 20px;
+#cabecalho .view .botao a {
 	margin: 5px;
+	display: block;
 }
 
 .botao {
 	display: inline-block;
-	margin-bottom: 1rem;
-	background-color: rgba(255, 255, 255, 0.08);
+	margin: 5px;
+	background-color: rgba(255, 255, 255, 0.5);
 	border-color: rgba(255, 255, 255, 0.2);
 	border-style: solid;
 	border-width: 1px;
@@ -30,20 +30,31 @@ body {
 .botao:hover,
 .botao:visited,
 .botao:active {
-	color: rgba(255, 255, 255, 0.7);
+	color: #000000;
 }
 
 .botao:hover {
-	background-color: rgba(255, 255, 255, 0.2);
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.botao a {
+	padding: 10px;
+	display: block;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 #cabecalho {
 	width: 100%;
-	background-color: #159957;
-	background-image: linear-gradient(120deg, #155799, #159957);
 	color: white;
 	height: 260px;
 	padding-top: 10px;
+}
+
+#cabecalho,
+#conteudo table thead tr {
+	background-color: #8982a4;
+	background-image: linear-gradient(120deg, #245a77, #8982a4);
 }
 
 #logo {
@@ -63,7 +74,7 @@ body {
 	border-radius: 20px;
 }
 
-#python {
+#logo_linguagem {
 	float: right;
 }
 
@@ -83,16 +94,12 @@ body {
 
 .menu .botao {
 	margin: 10px;
-	padding: 10px;
 	width: 180px;
 }
 
 .menu .botao a {
-	display: block;
 	font-size: 20px;
-	color: white;
-	text-decoration: none;
-	font-weight: bold;
+	color: #000000;
 }
 
 #conteudo {
@@ -152,22 +159,24 @@ body {
 	color: black;
 }
 
-#conteudo table thead tr {
+.bloco table thead tr {
 	font-weight: bold;
-	background-color: #159957;
-	background-image: linear-gradient(120deg, #155799, #159957);
 	color: #FFFFFF;
 }
 
-#conteudo table thead tr th {
+.bloco table thead tr th {
 	-webkit-filter: brightness(1000%);
 	filter: brightness(1000%);
+}
+
+.bloco table td {
+	text-align: justify;
 }
 
 hr {
 	border-color: white;
 	border-style: solid;
-	border-top: solid 1px #EFF0F1;
+	border-top: solid 3px #EFF0F1;
 }
 
 input, select {

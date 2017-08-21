@@ -1,5 +1,3 @@
-var tbody, trBase;
-
 var linguagem = "Python";
 
 var nomeProjeto = "Exercicios" + linguagem;
@@ -21,6 +19,10 @@ var dificuldades = {
 // Atualização de Lista de Exercícios
 function atualizarListaExercicios(arquivos)
 {
+	var tbodyExercicios = $("#exercicios").find("table").find("tbody");
+	var trBaseLinks = tbodyExercicios.find("tr");
+	trBaseLinks.remove();
+
 	$.each(arquivos, function(chave, arquivo) {
 		chave++;
 
@@ -55,7 +57,7 @@ function atualizarListaExercicios(arquivos)
 			var dificuldade = linhas[4].split("Dificuldade: ").join("");
 			var dificuldadeId = dificuldades[dificuldade];
 
-			var trClone = trBase.clone();
+			var trClone = trBaseLinks.clone();
 
 			var td = trClone.find("td");
 
@@ -77,7 +79,7 @@ function atualizarListaExercicios(arquivos)
 			td.eq(3).find(".dificuldade").text(dificuldade);
 			td.eq(3).find(".objetivo").attr("title", objetivo);
 
-			tbody.append(trClone);
+			tbodyExercicios.append(trClone);
 
 			if (chave === arquivos.length)
 				definirEventos();
@@ -143,7 +145,31 @@ function definirEventos()
 		$("[data-toggle='tooltip']").tooltip();
 
 		definirDataTable();
-	}, 0);
+	}, 50);
+}
+
+// Atualizar Tabela de Links
+function atualizarLinks()
+{
+	var tbodyLinks = $("#links").find("table").find("tbody");
+	var trBaseLinks = tbodyLinks.find("tr");
+	trBaseLinks.remove();
+
+	$.each(links, function(chave, link){
+		chave++;
+
+		var trClone = trBaseLinks.clone();
+
+		var td = trClone.find("td");
+
+		td.eq(0).text(chave);
+
+		td.eq(1).find("a").attr("href", link.link).text(link.titulo);
+
+		td.eq(2).text(link.descricao);
+
+		tbodyLinks.append(trClone);
+	});
 }
 
 $(function(){
@@ -152,9 +178,7 @@ $(function(){
 	$("a[data-type='exercicios']").attr("href", urlBaseDiretorios + "exercicios/");
 	$("a[data-type='resolucoes']").attr("href", urlBaseDiretorios + "resolucoes/");
 
-	tbody = $("#exercicios").find("table").find("tbody");
-	trBase = tbody.find("tr");
-	trBase.remove();
+	atualizarLinks();
 
 	$.getJSON(urlAPI, function(arquivos){
 		atualizarListaExercicios(arquivos);

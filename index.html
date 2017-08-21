@@ -21,19 +21,24 @@
 
 		<!-- Arquivo de estilos e JavaScript customizados -->
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
+		<script src="js/links.js"></script>
 		<script src="js/index.js"></script>
 	</head>
 	<body>
 		<div id="cabecalho">
 			<div align="center">
 				<div class="view">
-					<a href="#" target="_blank" data-type="github" class="botao">Projeto no GitHub</a>
-					<a href="#" target="_blank" data-type="website_files" class="botao">Arquivos do Website no GitHub</a>
+					<div class="botao">
+						<a href="#" target="_blank" data-type="github">Projeto no GitHub</a>
+					</div>
+					<div class="botao">
+						<a href="#" target="_blank" data-type="website_files">Arquivos do Website no GitHub</a>
+					</div>
 				</div>
 			</div>
 			<div id="logo">
 				<img src="imagens/logo.png" alt="Logo">
-				<img src="imagens/python.png" id="python" alt="Python Logo">
+				<img src="imagens/logo_linguagem.png" id="logo_linguagem" alt="Logo Linguagem">
 			</div>
 
 			<div class="menu" align="center">
@@ -136,9 +141,12 @@
 					<br>
 				</div>
 			</div>
+			<div class="separador" align="center">
+				<img src="imagens/separador_branco.png" alt="Separador">
+			</div>
 			<div id="links" class="bloco" align="center">
 				<div class="conteudo_bloco">
-					<h1><span class="fa fa-link"></span> Links</h1>
+					<h1><span class="fa fa-link"></span> Links Úteis</h1>
 					<p>
 						Esse bloco da página é destinado para links úteis que podem
 						servir tanto para iniciar o desenvolvimento com a linguagem
@@ -150,6 +158,32 @@
 						Nessa área também estão disponiveis os links de softwares que
 						utilizamos para o desenvolvimento.
 					</p>
+
+					<hr>
+					<br>
+
+					<table width="100%" cellpadding="5" cellspacing="0" class="table table-striped table-bordered datatable">
+						<thead>
+							<tr>
+								<th width="10%">#</th>
+								<th width="20%">Título</th>
+								<th width="50%">Descrição</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td align="center">
+									1
+								</td>
+								<td>
+									<a href="#" target="_blank">Títuloi</a>
+								</td>
+								<td>
+									Descrição
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
