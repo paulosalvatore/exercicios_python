@@ -16,6 +16,8 @@ var dificuldades = {
 	"Avançado": 3
 };
 
+var arquivosLidos = [];
+
 // Atualização de Lista de Exercícios
 function atualizarListaExercicios(arquivos)
 {
@@ -30,7 +32,7 @@ function atualizarListaExercicios(arquivos)
 		var htmlURL = arquivo.html_url;
 
 		$.ajax({
-			url: downloadURL
+			url: downloadURL + "asd"
 		}).done(function(conteudo){
 			var linhas = conteudo.split("\n");
 
@@ -85,8 +87,14 @@ function atualizarListaExercicios(arquivos)
 
 			tbodyExercicios.append(trClone);
 
-			if (chave === arquivos.length)
-				definirEventos();
+			arquivosLidos.push(chave);
+
+			checarEventos(arquivos);
+		})
+		.fail(function(){
+			arquivosLidos.push(chave);
+
+			checarEventos(arquivos);
 		});
 	});
 }
@@ -142,14 +150,19 @@ function definirDataTable()
 	});
 }
 
+// Checar se podemos definir os Eventos da Página
+function checarEventos(arquivos)
+{
+	if (arquivosLidos.length === arquivos.length)
+		definirEventos();
+}
+
 // Eventos da Página
 function definirEventos()
 {
-	setTimeout(function(){
-		$("[data-toggle='tooltip']").tooltip();
+	$("[data-toggle='tooltip']").tooltip();
 
-		definirDataTable();
-	}, 50);
+	definirDataTable();
 }
 
 // Atualizar Tabela de Links
