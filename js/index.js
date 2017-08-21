@@ -53,8 +53,9 @@ function atualizarListaExercicios(arquivos)
 				}
 			});
 
-			var objetivo = linhas[3].split("Objetivo: ").join("");
-			var dificuldade = linhas[4].split("Dificuldade: ").join("");
+			var nome = linhas[3].split("Nome: ").join("");
+			var objetivo = linhas[4].split("Objetivo: ").join("");
+			var dificuldade = linhas[5].split("Dificuldade: ").join("");
 			var dificuldadeId = dificuldades[dificuldade];
 
 			var trClone = trBaseLinks.clone();
@@ -63,7 +64,10 @@ function atualizarListaExercicios(arquivos)
 
 			td.eq(0).text(chave);
 
-			td.eq(1).find("a").eq(0).attr("href", linkExercicio(htmlURL));
+			td.eq(1)
+				.find("a").eq(0)
+				.text(nome)
+				.attr("href", linkExercicio(htmlURL));
 			td.eq(1)
 				.find("a").eq(1)
 				.attr("download", "exercicio" + chave + ".py")
