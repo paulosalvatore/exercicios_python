@@ -18,6 +18,9 @@ var dificuldades = {
 
 var arquivosLidos = [];
 
+var quantidadeExerciciosElemento;
+var quantidadeExercicios = 0;
+
 // Atualização de Lista de Exercícios
 function atualizarListaExercicios(arquivos)
 {
@@ -55,6 +58,7 @@ function atualizarListaExercicios(arquivos)
 				}
 			});
 
+			var id = parseInt(linhas[1].split("Exercício ").join(""));
 			var nome = linhas[3].split("Nome: ").join("");
 			var objetivo = linhas[4].split("Objetivo: ").join("");
 			var dificuldade = linhas[5].split("Dificuldade: ").join("");
@@ -64,8 +68,7 @@ function atualizarListaExercicios(arquivos)
 
 			var td = trClone.find("td");
 
-			td.eq(0).text(chave);
-
+			td.eq(0).text(id);
 			td.eq(1)
 				.find("a").eq(0)
 				.text(nome)
@@ -90,6 +93,13 @@ function atualizarListaExercicios(arquivos)
 			arquivosLidos.push(chave);
 
 			checarEventos(arquivos);
+
+			if (id > quantidadeExercicios)
+			{
+				quantidadeExercicios = id;
+
+				quantidadeExerciciosElemento.text(quantidadeExercicios);
+			}
 		})
 		.fail(function(){
 			arquivosLidos.push(chave);
@@ -190,6 +200,8 @@ function atualizarLinks()
 }
 
 $(function(){
+	quantidadeExerciciosElemento = $("#quantidadeExercicios");
+
 	$("a[data-type='github']").attr("href", urlBase);
 	$("a[data-type='website_files']").attr("href", urlWebsiteBase);
 	$("a[data-type='exercicios']").attr("href", urlBaseDiretorios + "exercicios/");
