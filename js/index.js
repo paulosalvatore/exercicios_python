@@ -69,20 +69,21 @@ function atualizarListaExercicios(arquivos)
 			var td = trClone.find("td");
 
 			td.eq(0).text(id);
+
 			td.eq(1)
 				.find("a").eq(0)
 				.text(nome)
 				.attr("href", linkExercicio(htmlURL));
 			td.eq(1)
 				.find("a").eq(1)
-				.attr("download", "exercicio" + chave + ".py")
-				.attr("href", "data:application/python;charset=utf-8;base64," + btoa(conteudoExercicio));
+				.attr("download", "exercicio" + id + ".py")
+				.attr("href", "data:application/python;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(conteudoExercicio))));
 
 			td.eq(2).find("a").eq(0).attr("href", htmlURL);
 			td.eq(2)
 				.find("a").eq(1)
-				.attr("download", "exercicio" + chave + "_resolvido.py")
-				.attr("href", "data:application/python;charset=utf-8;base64," + btoa(conteudo));
+				.attr("download", "exercicio" + id + "_resolvido.py")
+				.attr("href", "data:application/python;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(conteudo))));
 
 			td.eq(3).attr("data-order", dificuldadeId);
 			td.eq(3).find(".dificuldade").text(dificuldade);
