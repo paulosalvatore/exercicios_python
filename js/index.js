@@ -202,7 +202,7 @@ function linkExercicio(url)
 {
 	return url
 		.replace("/resolucoes/", "/exercicios/")
-		.replace("/_resolvido/", "");
+		.replace("_resolvido", "");
 }
 
 // DataTable
